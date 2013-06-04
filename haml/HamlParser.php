@@ -942,14 +942,14 @@ class HamlParser {
 					$attributes["data-$key"] = $value;				
 				} // foreach
 			}
-			elseif (!empty($attr[4])) {
+			elseif ($attr[4] !== '') {
 				$values = array_map('trim', explode(',', $attr[4]));
 				if ($attr[3] !== 'class' && $attr[3] !== 'id') {
 					throw new HamlException('Attribute must be "class" or "id" with array value', array(), $this);
 				}
 				$attributes[$attr[3]] = '<?php echo ' . join(($attr[3] === 'id' ? ".'_'." : ".' '."), $values) . '; ?>';
 			}
-			elseif (!empty($attr[6])) {
+			elseif ($attr[6] !== '') {
 				$attributes[$attr[3]] = $this->interpolate($attr[6]);
 			}
 			elseif ($attr[6] === '') {
